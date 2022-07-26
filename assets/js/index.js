@@ -66,19 +66,48 @@ const valido = (e) => {
     let maxm2 = document.getElementById("maxm2").value;
     if (isNaN(rooms) || isNaN(minm2) || isNaN(maxm2)) {
         alert("los campos deben ser números");
-        init();
+        location.reload();
     } else if (rooms < 0 || minm2 < 0 || maxm2 < 0) {
         alert("los campos deben ser positivos");
-        init();
-    } else {
-        console.log(e)
-        return true;
+        location.reload();
+    }
+    else if (rooms = "" || minm2 =="" || maxm2 =="") {
+           // clear propiedades
+        alert("los campos no pueden estar vacios");
+        location.reload();
+        }
+     else {
+        console.log("valido");
     };
 
 }
 
+//funcion que recorre todo el array
+const recorre = () => {
 
-// clean inputs
+    propiedadesJSON.forEach((propiedad) => {
+        let div = document.createElement("div");
+        div.classList.add("propiedad");
+        div.innerHTML = div.innerHTML = `
+        <img src="${propiedad.src}" alt="" class="img-fluid">                
+        <section>
+            <h5>${propiedad.name}</h5>
+            <div class="d-flex">
+                <p>Cuartos: ${propiedad.rooms}</p>
+                <br>
+                <p>Metros: ${propiedad.m}</p>
+            </div>
+            <p class="my-3">${propiedad.description}</p>
+            <button class="btn btn-info ">Ver más</button onclick(alert = "mas info proximamente")>
+    
+        </section>
+    `;
+        propiedades.appendChild(div);
+        clearInputs();
+    
+    }
+    );
+}
 
 // filter propiedades
 const filtrar2 = () => {
@@ -128,17 +157,22 @@ const filtrar2 = () => {
     
 
 const filtrar = () => {
-    // clear propiedades
-    propiedades.innerHTML = "";
+
     // try to filter2 if valid and show error message if not
     try {
+            // clear propiedades
+    propiedades.innerHTML = "";
         valido();
         filtrar2();
+        clearInputs();
+        
+
     } catch (error) {
         alert("no hay propiedades que cumplan con los criterios");
         clearInputs();
+        recorre();
         console.log(error);
-        init();
+
     };
 };
 
@@ -149,38 +183,15 @@ const filtrar = () => {
 function init() {
     // clear propiedades
     propiedades.innerHTML = "";
+    recorre();
 
 
+    // count all propiedades
+    num = propiedades.childElementCount;
+    cantidad.innerHTML = num;
 
-    propiedadesJSON.forEach((propiedad) => {
-        let div = document.createElement("div");
-        div.classList.add("propiedad");
-        div.innerHTML = div.innerHTML = `
-        <img src="${propiedad.src}" alt="" class="img-fluid">                
-        <section>
-            <h5>${propiedad.name}</h5>
-            <div class="d-flex">
-                <p>Cuartos: ${propiedad.rooms}</p>
-                <br>
-                <p>Metros: ${propiedad.m}</p>
-            </div>
-            <p class="my-3">${propiedad.description}</p>
-            <button class="btn btn-info ">Ver más</button onclick(alert = "mas info proximamente")>
-
-        </section>
-    `;
-        propiedades.appendChild(div);
-        clearInputs();
-
-        // count all propiedades
-        num = propiedades.childElementCount;
-        cantidad.innerHTML = num;
-
-        boton = document.getElementById("btn");
-        boton.addEventListener("click", filtrar);
-
-
-    });
+    boton = document.getElementById("btn");
+    boton.addEventListener("click", filtrar);
 }
 
 

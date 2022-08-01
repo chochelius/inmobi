@@ -149,11 +149,11 @@ const filtrar2 = () => {
         </section>
     `;
         propiedades.appendChild(div);
-
         
-        num = filtrado.length;
-
     })
+    cantidad.innerHTML = "0";
+    cantidad.innerHTML = filtrado[0].value;
+ 
 }
 
     
@@ -171,11 +171,11 @@ const filtrar = () => {
         
 
     } catch (error) {
-        alert("no hay propiedades que cumplan con los criterios");
         clearInputs();
         recorre();
         console.log(error);
-
+        propiedades.innerHTML = "";
+    return alert("no hay propiedades que cumplan con los criterios");
     };
 };
 
@@ -187,15 +187,16 @@ function validateNum() {
             console.log("si hay propiedades");
             num = `${num}`;
             cantidad.innerHTML = num;
-        } else if (num === 0) {
+        } else if (num = 0) {
             console.log("no hay resultados");
             num = num.length;
-            return cantidad.innerHTML = "0";
+            cantidad.innerHTML = "0";
         };
     };
+    cantidad.innerHTML = '';
     cantidad.innerHTML = num;
     console.log(num);
-}
+};
 
 // Función que se ejecuta al cargar la página
 

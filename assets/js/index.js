@@ -51,6 +51,7 @@ let boton = document.getElementById("btn");
 let propiedades = document.querySelector(".propiedades");
 let propiedad = document.querySelectorAll(".propiedad");
 let cantidad = document.getElementById("cantidad");
+let num = 0;    
 
 const clearInputs = () => {
     document.getElementById("rooms").value = "";
@@ -58,9 +59,11 @@ const clearInputs = () => {
     document.getElementById("maxm2").value = "";
 }
 
+
+
 //validate inputs as numbers
 
-const valido = (e) => {
+function valido(e) {
     let rooms = document.getElementById("rooms").value;
     let minm2 = document.getElementById("minm2").value;
     let maxm2 = document.getElementById("maxm2").value;
@@ -71,12 +74,12 @@ const valido = (e) => {
         alert("los campos deben ser positivos");
         location.reload();
     }
-    else if (rooms = "" || minm2 =="" || maxm2 =="") {
-           // clear propiedades
+    else if (rooms = "" || minm2 == "" || maxm2 == "") {
+        // clear propiedades
         alert("los campos no pueden estar vacios");
         location.reload();
-        }
-     else {
+    }
+    else {
         console.log("valido");
     };
 
@@ -147,11 +150,10 @@ const filtrar2 = () => {
     `;
         propiedades.appendChild(div);
 
-        num = propiedades.childElementCount;
-        cantidad.innerHTML = num;
+        
+        num = filtrado.length;
 
-
-    }   )
+    })
 }
 
     
@@ -164,6 +166,7 @@ const filtrar = () => {
     propiedades.innerHTML = "";
         valido();
         filtrar2();
+        validateNum(num);
         clearInputs();
         
 
@@ -177,6 +180,22 @@ const filtrar = () => {
 };
 
 
+
+function validateNum() {
+    validateNum = function () {
+        if (num > 0) {
+            console.log("si hay propiedades");
+            num = `${num}`;
+            cantidad.innerHTML = num;
+        } else if (num === 0) {
+            console.log("no hay resultados");
+            num = num.length;
+            return cantidad.innerHTML = "0";
+        };
+    };
+    cantidad.innerHTML = num;
+    console.log(num);
+}
 
 // Función que se ejecuta al cargar la página
 
